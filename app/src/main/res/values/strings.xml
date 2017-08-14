@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">WeatherForecast</string>
+
+    <string name="base_url">http://api.openweathermap.org/data/2.5/></string>
+    <string name="api_key">64294a2eb3771a2da7e7b2218c6494fc></string>
+
+    <string name="format_temperature">%d\u2103</string>
+    <string name="format_pressure">%d bar</string>
+    <string name="format_humidity">%d%%</string>
+    <string name="format_wind_speed">%d m/s</string>
+</resources>
