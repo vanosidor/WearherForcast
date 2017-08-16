@@ -3,6 +3,7 @@ package com.production.sidorov.ivan.weatherforecast;
 import android.app.Application;
 
 
+import com.production.sidorov.ivan.weatherforecast.network.DaggerNetworkComponent;
 import com.production.sidorov.ivan.weatherforecast.network.NetworkComponent;
 import com.production.sidorov.ivan.weatherforecast.network.NetworkModule;
 
@@ -17,9 +18,7 @@ import timber.log.Timber;
 
 public class WeatherApplication extends Application {
 
-
     private NetworkComponent mNetworkComponent;
-
 
     @Override
     public void onCreate() {
@@ -29,9 +28,9 @@ public class WeatherApplication extends Application {
             Timber.plant(new Timber.DebugTree());
         }
 
-        /*mNetworkComponent = DaggerNetworkComponent.builder()
+        mNetworkComponent = DaggerNetworkComponent.builder()
                 .networkModule(new NetworkModule(getString(R.string.base_url)))
-                .build();*/
+                .build();
 
 
         RealmConfiguration realmConfiguration = new RealmConfiguration
@@ -41,7 +40,6 @@ public class WeatherApplication extends Application {
 
         Realm.setDefaultConfiguration(realmConfiguration);
     }
-
 
     public NetworkComponent getNetworkComponent() {
         return mNetworkComponent;

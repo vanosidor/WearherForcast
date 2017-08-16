@@ -10,6 +10,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.production.sidorov.ivan.weatherforecast.R;
+import com.production.sidorov.ivan.weatherforecast.WeatherApplication;
+import com.production.sidorov.ivan.weatherforecast.network.NetworkComponent;
+import com.production.sidorov.ivan.weatherforecast.network.WeatherService;
 import com.production.sidorov.ivan.weatherforecast.screen.main.adapter.ForecastAdapter;
 import com.production.sidorov.ivan.weatherforecast.data.model.Weather;
 import com.production.sidorov.ivan.weatherforecast.data.WeatherRepository;
@@ -18,16 +21,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class WeatherActivity extends AppCompatActivity implements ForecastAdapter.ListItemClickListener {
 
     public static final List<String> CITIES = Arrays.asList("Moscow","London","New York","Berlin","Madrid","Dublin");
     public static final String API_KEY = "64294a2eb3771a2da7e7b2218c6494fc";
 
+    @Inject
+    WeatherService weatherService;
 
     @BindView(R.id.weather_recycler_view)
     RecyclerView recyclerView;
@@ -44,6 +53,8 @@ public class WeatherActivity extends AppCompatActivity implements ForecastAdapte
         setContentView(R.layout.activity_weather);
         ButterKnife.bind(this);
 
+        ((WeatherApplication)getApplication()).getNetworkComponent().inject(this);
+
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
@@ -55,7 +66,7 @@ public class WeatherActivity extends AppCompatActivity implements ForecastAdapte
         recyclerView.setAdapter(mForecastAdapter);
 
 
-        WeatherRepository weatherRepository = WeatherRepository.getInstance();
+        /*WeatherRepository weatherRepository = WeatherRepository.getInstance();
 
         mWeatherSubscription = weatherRepository
                 .getWeather(CITIES)
@@ -63,18 +74,15 @@ public class WeatherActivity extends AppCompatActivity implements ForecastAdapte
                 .doOnSubscribe(this::showLoadingView)
                 .doAfterTerminate(this::hideLoadingView)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::showWeather, this::showError);
+                .subscribe(this::showWeather, this::showError);*/
 
 
-        /* test only
-        mWeatherSubscription = ApiFactory
-                .getWeatherService()
+        // test only
+        mWeatherSubscription = weatherService
                 .getWeather("Moscow",API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(weather -> Timber.d(weather.toString()), this::showError);
-                */
-
     }
 
     @Override
@@ -82,7 +90,6 @@ public class WeatherActivity extends AppCompatActivity implements ForecastAdapte
         if (mWeatherSubscription != null)
             mWeatherSubscription.unsubscribe();
         super.onPause();
-
     }
 
     public void showLoadingView() {

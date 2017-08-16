@@ -11,7 +11,6 @@ import rx.Observable;
  */
 
 public interface WeatherService {
-
     @GET("weather?units=metric")
     Observable<Weather> getWeather(@Query("q") String city, @Query("appid") String apiKey);
 }

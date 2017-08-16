@@ -39,14 +39,13 @@ public class NetworkModule {
     @Singleton
     Retrofit provideRetrofit(OkHttpClient okHttpClient
             ){
-        Retrofit retrofit = new Retrofit.Builder()
+
+        return new Retrofit.Builder()
                 .baseUrl(mBaseUrl)
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-        return retrofit;
     }
 
     @Provides
@@ -56,11 +55,10 @@ public class NetworkModule {
     }
 
     @Provides
+    @Singleton
     HttpLoggingInterceptor provideInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return httpLoggingInterceptor;
     }
-
-
 }
