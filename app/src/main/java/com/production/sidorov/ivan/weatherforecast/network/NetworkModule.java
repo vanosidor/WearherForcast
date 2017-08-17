@@ -37,9 +37,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(OkHttpClient okHttpClient
-            ){
-
+    Retrofit provideRetrofit(OkHttpClient okHttpClient){
         return new Retrofit.Builder()
                 .baseUrl(mBaseUrl)
                 .client(okHttpClient)
