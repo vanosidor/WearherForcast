@@ -15,7 +15,6 @@ public class Wind extends RealmObject implements Serializable {
     @SerializedName("speed")
     private double mSpeed;
 
-
     public int getSpeed() {
         return (int)mSpeed;
     }

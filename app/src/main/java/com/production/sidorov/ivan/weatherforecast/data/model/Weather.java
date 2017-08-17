@@ -46,7 +46,6 @@ public class Weather extends RealmObject implements Serializable {
         return mWind;
     }
 
-
     public void setWind(Wind wind) {
         this.mWind = wind;
     }

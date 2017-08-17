@@ -1,4 +1,4 @@
-package com.production.sidorov.ivan.weatherforecast.data;
+package com.production.sidorov.ivan.weatherforecast;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

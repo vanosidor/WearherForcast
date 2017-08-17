@@ -1,10 +1,10 @@
-package com.production.sidorov.ivan.weatherforecast.data.model;
+package com.production.sidorov.ivan.weatherforecast.data;
 
 import android.support.annotation.NonNull;
 
-import com.production.sidorov.ivan.weatherforecast.data.ActivityScope;
-import com.production.sidorov.ivan.weatherforecast.data.WeatherDataSource;
-import com.production.sidorov.ivan.weatherforecast.data.WeatherRepository;
+import com.production.sidorov.ivan.weatherforecast.ActivityScope;
+import com.production.sidorov.ivan.weatherforecast.data.repository.WeatherDataSource;
+import com.production.sidorov.ivan.weatherforecast.data.repository.WeatherRepository;
 import com.production.sidorov.ivan.weatherforecast.network.WeatherService;
 
 import dagger.Module;

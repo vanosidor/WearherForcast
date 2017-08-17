@@ -12,12 +12,14 @@ import android.widget.Toast;
 import com.production.sidorov.ivan.weatherforecast.R;
 import com.production.sidorov.ivan.weatherforecast.WeatherApplication;
 
-import com.production.sidorov.ivan.weatherforecast.data.model.DaggerRepositoryComponent;
-import com.production.sidorov.ivan.weatherforecast.data.model.RepositoryComponent;
+import com.production.sidorov.ivan.weatherforecast.data.DaggerRepositoryComponent;
+import com.production.sidorov.ivan.weatherforecast.data.RepositoryModule;
+
+import com.production.sidorov.ivan.weatherforecast.data.RepositoryComponent;
 import com.production.sidorov.ivan.weatherforecast.network.NetworkComponent;
 import com.production.sidorov.ivan.weatherforecast.screen.main.adapter.ForecastAdapter;
 import com.production.sidorov.ivan.weatherforecast.data.model.Weather;
-import com.production.sidorov.ivan.weatherforecast.data.WeatherRepository;
+import com.production.sidorov.ivan.weatherforecast.data.repository.WeatherRepository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import timber.log.Timber;
 
 public class WeatherActivity extends AppCompatActivity implements ForecastAdapter.ListItemClickListener {
 
@@ -57,10 +60,12 @@ public class WeatherActivity extends AppCompatActivity implements ForecastAdapte
 
         RepositoryComponent repositoryComponent = DaggerRepositoryComponent.builder()
                 .networkComponent(networkComponent)
+                .repositoryModule(new RepositoryModule())
                 .build();
 
         repositoryComponent.inject(this);
 
+        Timber.d(weatherRepository.toString());
         //((WeatherApplication)getApplication()).getNetworkComponent().inject(this);
 
         LinearLayoutManager layoutManager =

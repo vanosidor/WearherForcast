@@ -1,11 +1,8 @@
-package com.production.sidorov.ivan.weatherforecast.data;
-
-import android.support.annotation.Nullable;
+package com.production.sidorov.ivan.weatherforecast.data.repository;
 
 import com.production.sidorov.ivan.weatherforecast.network.WeatherService;
 import com.production.sidorov.ivan.weatherforecast.screen.main.WeatherActivity;
 import com.production.sidorov.ivan.weatherforecast.data.model.Weather;
-import com.production.sidorov.ivan.weatherforecast.network.ApiFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,28 +23,11 @@ import timber.log.Timber;
 
 public class WeatherRepository implements WeatherDataSource {
 
-
-    /*@Nullable
-    private static WeatherRepository INSTANCE = null;
-
-    private WeatherRepository() {
-
-    }
-
-    public static WeatherRepository getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new WeatherRepository();
-        }
-        return INSTANCE;
-    }*/
-
-    //private WeatherService mWeatherService;
-
-    WeatherService weatherService;
+    private WeatherService mWeatherService;
 
     @Inject
     public WeatherRepository(WeatherService weatherService) {
-        this.weatherService = weatherService;
+        this.mWeatherService = weatherService;
     }
 
     @Override
@@ -57,8 +37,7 @@ public class WeatherRepository implements WeatherDataSource {
 
         if (cityNames.size() != 0) {
             for (int i = 0; i < cityNames.size(); i++) {
-                weatherObservables.add(weatherService.getWeather(cityNames.get(i), WeatherActivity.API_KEY));
-                //weatherObservables.add(ApiFactory.getWeatherService().getWeather(cityNames.get(i), WeatherActivity.API_KEY));
+                weatherObservables.add(mWeatherService.getWeather(cityNames.get(i), WeatherActivity.API_KEY));
             }
         } else return null;
 

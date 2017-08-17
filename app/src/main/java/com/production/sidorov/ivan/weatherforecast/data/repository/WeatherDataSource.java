@@ -1,4 +1,4 @@
-package com.production.sidorov.ivan.weatherforecast.data;
+package com.production.sidorov.ivan.weatherforecast.data.repository;
 
 import com.production.sidorov.ivan.weatherforecast.data.model.Weather;
 

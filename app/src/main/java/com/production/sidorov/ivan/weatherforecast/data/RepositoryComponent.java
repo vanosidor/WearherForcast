@@ -1,9 +1,7 @@
-package com.production.sidorov.ivan.weatherforecast.data.model;
+package com.production.sidorov.ivan.weatherforecast.data;
 
-import com.production.sidorov.ivan.weatherforecast.data.ActivityScope;
-import com.production.sidorov.ivan.weatherforecast.data.WeatherDataSource;
+import com.production.sidorov.ivan.weatherforecast.ActivityScope;
 import com.production.sidorov.ivan.weatherforecast.network.NetworkComponent;
-import com.production.sidorov.ivan.weatherforecast.network.NetworkModule;
 import com.production.sidorov.ivan.weatherforecast.screen.main.WeatherActivity;
 
 import dagger.Component;
