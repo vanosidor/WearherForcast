@@ -17,7 +17,7 @@ import dagger.Provides;
 @Module
 public class RepositoryModule {
     @Provides
-    @ActivityScope
+    @RepositoryScope
     public WeatherDataSource provideRepository(@NonNull WeatherService weatherService){
         return new WeatherRepository(weatherService);
     }
