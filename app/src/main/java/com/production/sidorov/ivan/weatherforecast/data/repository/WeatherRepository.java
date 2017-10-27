@@ -1,5 +1,7 @@
 package com.production.sidorov.ivan.weatherforecast.data.repository;
 
+import android.support.annotation.NonNull;
+
 import com.production.sidorov.ivan.weatherforecast.network.WeatherService;
 import com.production.sidorov.ivan.weatherforecast.screen.main.WeatherActivity;
 import com.production.sidorov.ivan.weatherforecast.data.model.Weather;
@@ -31,20 +33,25 @@ public class WeatherRepository implements WeatherDataSource {
     }
 
     @Override
-    public Observable<List<Weather>> getWeather(List<String> cityNames) {
+    public Observable<List<Weather>> getWeather(@NonNull List<String> cityNames) {
 
-        List<Observable<Weather>> weatherObservables = new ArrayList<>();
-
-        if (cityNames.size() != 0) {
-            for (int i = 0; i < cityNames.size(); i++) {
-                weatherObservables.add(mWeatherService.getWeather(cityNames.get(i), WeatherActivity.API_KEY));
-            }
-        } else return null;
-
-        return Observable.zip(weatherObservables, Arrays::asList)
+        return Observable.zip(createCityListObservable(cityNames), Arrays::asList)
                 .map(this::castObjectToWeather)
                 .compose(new WeatherCacheTransformer())
                 .subscribeOn(Schedulers.io());
+    }
+
+    private List<Observable<Weather>> createCityListObservable(List<String> cityNames){
+
+        List<Observable<Weather>> weatherObservables = new ArrayList<>();
+
+            if (!cityNames.isEmpty()) {
+                for (int i = 0; i < cityNames.size(); i++) {
+                    weatherObservables.add(mWeatherService.getWeather(cityNames.get(i), WeatherActivity.API_KEY));
+                }
+                return weatherObservables;
+            }
+            else return null;
     }
 
     private List<Weather> castObjectToWeather(List<Object> objects){
