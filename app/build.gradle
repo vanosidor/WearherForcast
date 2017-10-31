@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
-apply plugin: 'me.tatarka.retrolambda'
+//apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.fernandocejas.frodo'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.production.sidorov.ivan.weatherforecast"
         minSdkVersion 19
@@ -34,15 +34,15 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.4.0'
 
     testCompile 'junit:junit:4.12'
 
     //ButterKnife
-    compile 'com.jakewharton:butterknife:8.7.0'
-    apt 'com.jakewharton:butterknife-compiler:8.7.0'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     //Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
@@ -55,14 +55,13 @@ dependencies {
 
     //RxJava
     compile "io.reactivex:rxandroid:1.2.1"
-    compile "io.reactivex:rxjava:1.1.10"
+    compile "io.reactivex:rxjava:1.2.1"
 
     //Timber
     compile 'com.jakewharton.timber:timber:4.5.1'
 
     //Dagger
     compile 'com.google.dagger:dagger:2.11'
-    apt 'com.google.dagger:dagger-compiler:2.11'
-    provided 'javax.annotation:jsr250-api:1.0'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
 }
 

@@ -1,6 +1,7 @@
 package com.production.sidorov.ivan.weatherforecast.data.repository;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.production.sidorov.ivan.weatherforecast.network.WeatherService;
 import com.production.sidorov.ivan.weatherforecast.screen.main.WeatherActivity;
@@ -41,6 +42,7 @@ public class WeatherRepository implements WeatherDataSource {
                 .subscribeOn(Schedulers.io());
     }
 
+    @Nullable
     private List<Observable<Weather>> createCityListObservable(List<String> cityNames){
 
         List<Observable<Weather>> weatherObservables = new ArrayList<>();
@@ -49,6 +51,7 @@ public class WeatherRepository implements WeatherDataSource {
                 for (int i = 0; i < cityNames.size(); i++) {
                     weatherObservables.add(mWeatherService.getWeather(cityNames.get(i), WeatherActivity.API_KEY));
                 }
+                Timber.d("City List of Observable created");
                 return weatherObservables;
             }
             else return null;
@@ -59,6 +62,7 @@ public class WeatherRepository implements WeatherDataSource {
         for (int j = 0; j < objects.size(); j++) {
             weathers.add((Weather)(objects.get(j)));
         }
+        Timber.d("Cast weather as List<Weather>");
         return weathers;
     }
 

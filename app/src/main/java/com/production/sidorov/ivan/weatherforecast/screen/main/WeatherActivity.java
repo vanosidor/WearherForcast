@@ -28,6 +28,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Subscription;
+import timber.log.Timber;
 
 public class WeatherActivity extends AppCompatActivity implements MainScreenView,ForecastAdapter.ListItemClickListener {
 
@@ -114,10 +115,12 @@ public class WeatherActivity extends AppCompatActivity implements MainScreenView
     @Override
     public void showLoadingView() {
         mLoadingProgressBar.setVisibility(View.VISIBLE);
+        Timber.d("Show progress bar");
     }
 
     @Override
     public void hideLoadingView() {
         mLoadingProgressBar.setVisibility(View.INVISIBLE);
+        Timber.d("Hide progress bar");
     }
 }

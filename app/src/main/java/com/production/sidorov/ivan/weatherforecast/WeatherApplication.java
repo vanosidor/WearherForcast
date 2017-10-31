@@ -32,9 +32,10 @@ public class WeatherApplication extends Application {
                 .networkModule(new NetworkModule(getString(R.string.base_url)))
                 .build();
 
+        Realm.init(getApplicationContext());
 
         RealmConfiguration realmConfiguration = new RealmConfiguration
-                .Builder(this)
+                .Builder()
                 .rxFactory(new RealmObservableFactory())
                 .build();
 

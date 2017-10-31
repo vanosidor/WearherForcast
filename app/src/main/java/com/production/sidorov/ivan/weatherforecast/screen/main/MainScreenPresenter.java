@@ -17,7 +17,7 @@ import static com.production.sidorov.ivan.weatherforecast.screen.main.WeatherAct
 
 public class MainScreenPresenter {
 
-    private WeatherDataSource  weatherRepository;
+    private WeatherDataSource weatherRepository;
     private MainScreenView mainScreenView;
     private final Scheduler mainScheduler;
 
@@ -33,8 +33,8 @@ public class MainScreenPresenter {
                 .getWeather(CITIES)
                 .delay(3000L, TimeUnit.MILLISECONDS) //imitation slow connection
                 .doOnSubscribe(mainScreenView::showLoadingView)
-                .doAfterTerminate(mainScreenView::hideLoadingView)
                 .observeOn(mainScheduler)
+                .doAfterTerminate(mainScreenView::hideLoadingView)
                 .subscribe(mainScreenView::showWeather, mainScreenView::showError);
     }
 }
